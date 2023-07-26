@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-6-rest-mvc-5-list-beer/spring-6-rest-mvc.iml" filepath="$PROJECT_DIR$/spring-6-rest-mvc-5-list-beer/spring-6-rest-mvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-6-rest-mvc-5-list-beer.iml" filepath="$PROJECT_DIR$/.idea/spring-6-rest-mvc-5-list-beer.iml" />
+    </modules>
+  </component>
+</project>
