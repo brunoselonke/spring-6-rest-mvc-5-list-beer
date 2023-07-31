@@ -57,7 +57,7 @@ class CustomerControllerTest {
         Customer customer = customerServiceImpl.getAllCustomers().get(0);
 
         Map<String, Object> customerMap = new HashMap<>();
-        customerMap.put("customerName", "New Name");
+        customerMap.put("name", "New Name");
 
         mockMvc.perform(patch("/api/v1/customer/"+customer.getId())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -67,7 +67,7 @@ class CustomerControllerTest {
 
         verify(customerService).updatePatchCustomerById(uuidArgumentCaptor.capture(), customerArgumentCaptor.capture());
         assertEquals(customer.getId(), uuidArgumentCaptor.getValue());
-        assertEquals(customerMap.get("customerName"), customerArgumentCaptor.getValue().getName());
+        assertEquals(customerMap.get("name"), customerArgumentCaptor.getValue().getName());
     }
 
     @Test
