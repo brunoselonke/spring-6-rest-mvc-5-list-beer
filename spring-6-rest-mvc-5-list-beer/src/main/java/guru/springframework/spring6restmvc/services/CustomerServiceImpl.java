@@ -4,6 +4,7 @@ import guru.springframework.spring6restmvc.model.CustomerDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -59,10 +60,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         CustomerDTO savedCustomer = CustomerDTO.builder()
                 .id(UUID.randomUUID())
+                .version(1)
                 .name(customer.getName())
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
-                .version(1)
                 .build();
 
         customerMap.put(savedCustomer.getId(), savedCustomer);
@@ -70,26 +71,29 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomerById(UUID customerId, CustomerDTO customer) {
+    public Optional<CustomerDTO> updateCustomerById(UUID customerId, CustomerDTO customer) {
         CustomerDTO existing = customerMap.get(customerId);
         existing.setName(customer.getName());
         existing.setUpdateDate(LocalDateTime.now());
 
+        return Optional.of(existing);
     }
 
     @Override
-    public void deleteCustomerById(UUID customerId) {
+    public Boolean deleteCustomerById(UUID customerId) {
+
         customerMap.remove(customerId);
+        return true;
     }
 
     @Override
-    public void updatePatchCustomerById(UUID customerId, CustomerDTO customer) {
+    public Optional<CustomerDTO> updatePatchCustomerById(UUID customerId, CustomerDTO customer) {
         CustomerDTO existing = customerMap.get(customerId);
 
         if (StringUtils.hasText(customer.getName())){
             existing.setName(customer.getName());
+            existing.setUpdateDate(LocalDateTime.now());
         }
-
-        existing.setUpdateDate(LocalDateTime.now());
+        return Optional.of(existing);
     }
 }
